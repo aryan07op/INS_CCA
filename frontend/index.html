@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PASSWORD SALTING DEMO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/retro-style.css">
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  
+  <div class="app-container">
+    <div class="header">
+      <span class="dots">
+        <span></span><span></span><span></span>
+      </span>
+      <span class="title glow">🧂 PASSWORD SALTING DEMO</span>
+    </div>
+
+    <div class="warning">⚠️ EDUCATIONAL DEMO ONLY — DO NOT USE REAL PASSWORDS ⚠️</div>
+
+    <div class="step-container">
+      <h2>STEP 1: THE PROBLEM (UNSALTED)</h2>
+      <p>An unsalted hash is just the output of a hash function (like SHA-256). If two users have the same password, they have the same hash. An attacker can pre-compute hashes for common passwords (a "Rainbow Table") and instantly crack them.</p>
+      
+      <label for="password_step1">Enter a common password (e.g., 'password'):</label>
+      <input type="password" id="password_step1" value="password">
+      <button id="run_step1">🚀 Run Attack Demo</button>
+      
+      <div id="loading_step1" class="loading-text" style="display:none;">Running attack...</div>
+      <pre id="result_step1" style="display:none;"></pre>
+    </div>
+
+    <hr class="divider">
+
+    <div class="step-container">
+      <h2>STEP 2: THE SOLUTION (SALTING)</h2>
+      <p>A "salt" is a unique, random string added to *each* password before hashing. Now, two identical passwords will have different hashes. This makes rainbow tables useless.</p>
+      
+      <label for="password_step2a">🔑 Password A (try "123456"):</label>
+      <input type="password" id="password_step2a" value="123456">
+
+      <label for="password_step2b">🔑 Password B (use the *same* password "123456"):</label>
+      <input type="password" id="password_step2b" value="123456">
+
+      <label>
+        <input type="checkbox" id="reuse_salt_step2"> Use same salt for both (Demo of a *bad* practice)
+      </label>
+      
+      <button id="run_step2">📊 Compare Salted Hashes</button>
+      
+      <div id="loading_step2" class="loading-text" style="display:none;">Generating hashes...</div>
+      <pre id="result_step2" style="display:none;"></pre>
+    </div>
+    
+    <hr class="divider">
+
+    <div class="step-container">
+      <h2>STEP 3: THE MODERN STANDARD (BCRYPT)</h2>
+      <p>Modern functions like Bcrypt and Argon2 automatically generate unique salts and include them *inside* the final hash string. They are also intentionally "slow" (key stretching) to resist brute-force attacks.</p>
+      
+      <label for="password_step3">Enter any password:</label>
+      <input type="password" id="password_step3" value="MySuperSecurePass!">
+      <button id="run_step3">🛡️ Run Bcrypt Demo</button>
+      
+      <div id="loading_step3" class="loading-text" style="display:none;">Generating bcrypt hashes...</div>
+      <pre id="result_step3" style="display:none;"></pre>
+    </div>
+
+  </div>
+
+</body>
+</html>
